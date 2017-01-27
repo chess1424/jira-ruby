@@ -25,6 +25,11 @@ module JIRA
         parse_json(response.body)
       end
 
+      def self.get_active_sprint(client, board_id)
+        response = client.get("/rest/agile/1.0/board/#{board_id}/sprint?state=active")
+        parse_json(response.body)
+      end
+
       def self.get_sprint_issues(client, sprint_id, options = {})
         options[:maxResults] ||= 100
         response = client.get("/rest/agile/1.0/sprint/#{sprint_id}/issue?maxResults=#{options[:maxResults]}")
