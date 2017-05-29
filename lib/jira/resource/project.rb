@@ -27,7 +27,9 @@ module JIRA
         end
       end
 
-      def users(start_at: nil, max_results: nil)
+      def users(options={start_at: nil, max_results: nil})
+        start_at = options[:start_at]
+        max_results = options[:max_results]
         users_url = client.options[:rest_base_path] + '/user/assignable/search'
         query_params = { project: self.key_value }
         query_params['startAt'] = start_at if start_at
